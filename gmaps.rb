@@ -7,16 +7,18 @@ color = "
 █▀▀ █▀▄▀█ ▄▀█ █▀█ █▀   ▄▀█ █▀█ █   █▀▀ █░█ █▀▀ █▀▀ █▄▀ █▀▀ █▀█
 █▄█ █░▀░█ █▀█ █▀▀ ▄█   █▀█ █▀▀ █   █▄▄ █▀█ ██▄ █▄▄ █░█ ██▄ █▀▄
 
-                    coded : [z3n70]
+                    coded : [Little_Boy]
 "
 
 puts color.colorize(:red)
 
 def scan()
-
-    # ?apikey="AIzaSyA3bsDl1xddiU_w38hA-fsGea8kWsp5uJM" #api vuln
+    print 'Enter You Google Maps API Key : '
+    apikey = gets.chomp
+    puts
+    # apikey="AIzaSyA3bsDl1xddiU_w38hA-fsGea8kWsp5uJM" #api vuln
     #  apikey="AIzaSyB41WOlRVKsPo0ZCoznE3qvwQ-AkWoONIY"#api gk vuln
-    apikey="AIzaSyDDGnGXfMSJASUkudAzyIjaOXuCeWxxyN0"#api invalid
+    # apikey="AIzaSyDDGnGXfMSJASUkudAzyIjaOXuCeWxxyN0"#api invalid
         puts "1. APIKey Google Apis Consumersearch 5$ Per 1000 Request"
         url = "https://www.googleapis.com/customsearch/v1?cx=017576662512468239146:omuauf_lfve&q=lectures&key=#{apikey}"
 
@@ -239,6 +241,10 @@ def scan()
             puts 'Not Vulnerable'.colorize(:red)
         else result.body.include?('The Google Maps Embed API must be used in an iframe.') 
             puts "Vulnerable => PoC <iframe width='600' height='450' frameborder='0' style='border:0' src='#{url}'allowfullscreen></iframe>".colorize(:yellow)
-        end        
+        end  
+        
+    rescue Interrupt
+        puts "Leaving the program...".red
 end
+
 scan()
